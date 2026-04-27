@@ -1,4 +1,4 @@
-class ToDo{
+export class ToDo{
     constructor(title,description,dueDate,priority,notes){
         this.title=title;
         this.description=description;
@@ -8,7 +8,7 @@ class ToDo{
     }
 }
 
-class Project{
+export class Project{
     constructor(title,todos){
         this.title=title;
         this.todos=[];
@@ -21,6 +21,7 @@ class Project{
         
     }
     addtoDo(todo){
-        this.todos.push(this.todo);
+        
+        this.todos.push(todo);
     }
 }
