@@ -3,9 +3,19 @@ import "./styles.css";
 import { Project, ToDo } from "./class.js";
 
 const myProject = new Project("Uni Work");
-const myTodo = new ToDo("Finish Odin", "Todo app", "2026-04-30", "High", "");
 
 
+const savedTodos = JSON.parse(localStorage.getItem("todos"));
+
+if (savedTodos) {
+  savedTodos.forEach(todo => {
+    myProject.addtoDo(
+      new ToDo(todo.title, todo.description, todo.dueDate, todo.priority, todo.notes)
+    );
+  });
+}
+
+ 
 
  
 
@@ -28,6 +38,7 @@ form.addEventListener("submit", (e) => {
     const notes = form.querySelector("textarea").value;
     const newTodo = new ToDo(title, description, dueDate, priority, notes);
     myProject.addtoDo(newTodo);
+    localStorage.setItem("todos", JSON.stringify(myProject.todos));
     console.log(newTodo); 
     renderTodos();
  
@@ -53,6 +64,7 @@ function renderTodos() {
         cancel.textContent="Delete Note";
         cancel.addEventListener("click", (e)=>{
             myProject.deletetoDo(index)
+            localStorage.setItem("todos", JSON.stringify(myProject.todos));
             renderTodos();
         })
 
@@ -61,4 +73,5 @@ function renderTodos() {
         todoList.appendChild(cancel);
     });
 }
+renderTodos();
  
