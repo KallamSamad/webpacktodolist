@@ -38,7 +38,7 @@ const todoList = document.querySelector(".todoList");
 function renderTodos() {
     todoList.innerHTML = ""; // clear old todos
 
-    myProject.todos.forEach(element => {
+    myProject.todos.forEach((element,index) => {
         const todoCard = document.createElement("div");
          
         todoCard.innerHTML = `
@@ -49,7 +49,13 @@ function renderTodos() {
         <p>${element.notes}</p>
           `;              
         const cancel=document.createElement("button");
+        cancel.className="delete"
         cancel.textContent="Delete Note";
+        cancel.addEventListener("click", (e)=>{
+            myProject.deletetoDo(index)
+            renderTodos();
+        })
+
         
         todoList.appendChild(todoCard);
         todoList.appendChild(cancel);
